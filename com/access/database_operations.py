@@ -2,7 +2,7 @@ from com.access.DatabaseConnector.Connection import Connection
 import uuid
 from mysql.connector import errorcode
 from mysql.connector import Error
-from com.helpers.ConfigParser import read_config
+from com.helpers.ConfigParser import ConfigurationLoader
 
 
 class DatabaseOperationsWrapper:
@@ -13,9 +13,10 @@ class DatabaseOperationsWrapper:
     CONNECTION = Connection('AWS')
 
     def __init__(self):
-        self.QUERY_USER_DETAILS = read_config(self.CONFIG, 'user_details')
-        self.QUERY_CREATE_USER = read_config(self.CONFIG, 'create_user')
-        self.QUERY_UPDATE_LAST_LOGIN = read_config(self.CONFIG, 'update_last_login')
+        loader = ConfigurationLoader()
+        self.QUERY_USER_DETAILS = loader.load(self.CONFIG, 'user_details')
+        self.QUERY_CREATE_USER = loader.load(self.CONFIG, 'create_user')
+        self.QUERY_UPDATE_LAST_LOGIN = loader.load(self.CONFIG, 'update_last_login')
         self.CONNECTION = Connection('AWS')
 
     def fetch_user_data(self, user_name):

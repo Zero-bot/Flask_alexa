@@ -1,5 +1,5 @@
 from com.access.DatabaseConnector.Connection import Connection
-from com.helpers.ConfigParser import read_config
+from com.helpers.ConfigParser import ConfigurationLoader
 from enum import Enum
 
 
@@ -15,8 +15,9 @@ class RaspberryDevices:
     query_update_device_state = ''
 
     def __init__(self):
-        self.query_get_device = read_config(self.database_config, 'get_device_data')
-        self.query_update_device_state = read_config(self.database_config, 'update_device_state')
+        loader = ConfigurationLoader()
+        self.query_get_device = loader.load(self.database_config, 'get_device_data')
+        self.query_update_device_state = loader.load(self.database_config, 'update_device_state')
         self.connection = Connection('AWS').connect()
 
     def get_device(self, name):
