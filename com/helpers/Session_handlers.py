@@ -1,15 +1,21 @@
-def invalidate_session(session_dict, session_vars):
-    for value in session_vars:
-        session_dict.pop(value, None)
+class Session:
+    admin = None
+    session_dict = None
 
+    def __init__(self, session_dict):
+        self.session_dict = session_dict
+        self.admin = 'ADMIN'
 
-def is_valid_session(session_dict):
-    if session_dict:
-        if session_dict['logged']:
-            return True
+    def destroy_session(self, session_vars):
+        for value in session_vars:
+            self.session_dict.pop(value, None)
+
+    def is_valid_session(self):
+        if self.session_dict:
+            if self.session_dict['logged']:
+                return True
+            return False
         return False
-    return False
 
-
-def is_admin(session_dict):
-    return session_dict['role'] == 'ADMIN'
+    def is_admin(self):
+        return self.session_dict['role'] == self.admin

@@ -20,18 +20,3 @@ class RaspberryPi:
         return self.device.get_device(name=device)
 
 home = RaspberryPi()
-
-# def switch_on(device, user):
-#     RaspberryDevices.update_device_state(device, RaspberryDevices.Status.ON, user)
-#
-#
-# def switch_off(device, user):
-#     RaspberryDevices.update_device_state(device, RaspberryDevices.Status.OFF, user)
-#
-#
-# def toggle(device, user):
-#     RaspberryDevices.toggle_device_state(device, user)
-#
-#
-# def current_state(device):
-#     return RaspberryDevices.get_device(device)

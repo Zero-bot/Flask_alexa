@@ -7,15 +7,15 @@ from com.helpers.ConfigParser import read_config
 import websocket
 
 
-def on_error(ws, error):
+def on_error(web_service, error):
     print('Error:', error)
 
 
-def on_close(ws):
+def on_close(web_service):
     print('closed')
 
 
-def on_message(ws, message):
+def on_message(web_service, message):
     message = json.loads(message)
     if message["type"] == "tickle" and message["subtype"] == "push":
         print(time.time())
